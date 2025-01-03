@@ -3,22 +3,36 @@
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-<span class="nc" id="L6">public class Main {</span>
+<span class="nc" id="L6">class Main {</span>
 <span class="fc" id="L7">    private static final Logger logger = LoggerFactory.getLogger(Main.class);</span>
 
     public static void main(String[] args) {
 <span class="fc" id="L10">        logger.info(&quot;Main application running...&quot;);</span>
-
+        
         // Simulate some action
         try {
-            // Simulate some process here
-<span class="fc" id="L15">            logger.info(&quot;Processing...&quot;);</span>
-            // More logic...
-<span class="nc" id="L17">        } catch (Exception e) {</span>
-<span class="nc" id="L18">            logger.error(&quot;An error occurred: &quot;, e);</span>
-<span class="fc" id="L19">        }</span>
+<span class="nc" id="L14">            processApplication(args);</span>
+<span class="fc" id="L15">        } catch (Exception e) {</span>
+<span class="fc" id="L16">            logger.error(&quot;An error occurred: &quot;, e);</span>
+<span class="nc" id="L17">        }</span>
         
-<span class="fc" id="L21">        logger.info(&quot;Main application finished.&quot;);</span>
-<span class="fc" id="L22">    }</span>
+<span class="fc" id="L19">        logger.info(&quot;Main application finished.&quot;);</span>
+<span class="fc" id="L20">    }</span>
+
+    // Refactored method for better testability
+    public static void processApplication(String[] args) throws Exception {
+<span class="fc" id="L24">        logger.info(&quot;Processing...&quot;);</span>
+
+        // Simulate some process logic
+<span class="fc bfc" id="L27" title="All 2 branches covered.">        if (args.length == 0) {</span>
+<span class="fc" id="L28">            throw new IllegalArgumentException(&quot;No arguments provided&quot;);</span>
+        }
+        
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if (&quot;error&quot;.equals(args[0])) {</span>
+<span class="fc" id="L32">            throw new RuntimeException(&quot;Simulated error&quot;);</span>
+        }
+        
+        // More processing logic...
+<span class="fc" id="L36">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

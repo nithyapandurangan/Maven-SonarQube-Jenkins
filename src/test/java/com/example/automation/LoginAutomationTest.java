@@ -11,10 +11,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.time.Duration;
 
-public class LoginAutomationTest {
+class LoginAutomationTest {
 
     @Test
-    public void testLogin() {
+    void testLogin() {
         // Setting up WebDriver
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
 
@@ -61,7 +61,7 @@ public class LoginAutomationTest {
             // Validate successful login by checking page title
             String expectedTitle = "Swag Labs";  // Correct title after login
             String actualTitle = driver.getTitle();
-            assertEquals(expectedTitle, actualTitle);
+            assertEquals(expectedTitle, actualTitle);  // Adding assertion to validate login success
 
         } catch (Exception e) {
             e.printStackTrace();
