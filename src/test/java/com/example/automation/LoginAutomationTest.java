@@ -18,7 +18,7 @@ public class LoginAutomationTest {
         // Setting up WebDriver
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
 
-        // ChromeOptions to disable cache
+        // ChromeOptions to disable cache and enable debugging
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-logging");
         options.addArguments("--disable-cache");
@@ -47,18 +47,28 @@ public class LoginAutomationTest {
             usernameField.sendKeys(username);
             passwordField.sendKeys(password);
 
-            // Wait for the login button to be clickable
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            // Wait for the login button to be clickable with a longer timeout
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));  // Increased timeout
             loginButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("login-button")));
             loginButton.click();
+
+            // Wait for the page to load after login (check title or element visibility)
+            WebDriverWait pageWait = new WebDriverWait(driver, Duration.ofSeconds(30));  // Increased timeout
+            pageWait.until(ExpectedConditions.titleIs("Swag Labs"));
 
             // Validate successful login by checking page title
             String expectedTitle = "Swag Labs";  // Correct title after login
             String actualTitle = driver.getTitle();
             assertEquals(expectedTitle, actualTitle);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Test failed due to exception: " + e.getMessage());
         } finally {
-            // Close the browser
-            driver.quit();
+            // Ensure browser quits after the test to avoid hanging processes
+            if (driver != null) {
+                driver.quit();
+            }
         }
     }
 }
