@@ -18,13 +18,15 @@ public class LoginAutomationTest {
         // Setting up WebDriver
         System.setProperty("webdriver.chrome.driver", "C:\\Tools\\chromedriver.exe");
 
-        // ChromeOptions to disable cache and enable debugging
+        // Adding more options to the ChromeDriver for improved stability
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-logging");
         options.addArguments("--disable-cache");
         options.addArguments("--disk-cache-size=0");
         options.addArguments("--remote-debugging-port=9223");
         options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable-dev-shm-usage"); // New argument
+        options.addArguments("--no-sandbox");           // New argument
 
         // Initialize WebDriver with options
         WebDriver driver = new ChromeDriver(options);
